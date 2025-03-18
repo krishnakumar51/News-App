@@ -5,11 +5,9 @@ from deep_translator import GoogleTranslator
 from transformers import pipeline
 from langchain_groq import ChatGroq
 from serpapi import GoogleSearch
-from dotenv import load_dotenv
-
-load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-SERP_API_KEY = os.getenv("SERP_API_KEY")
+import streamlit as st
+SERP_API_KEY = st.secrets["SERP_API_KEY"]
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 
 llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0, groq_api_key=GROQ_API_KEY)
 sentiment_pipeline = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment")
